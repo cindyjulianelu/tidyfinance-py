@@ -10,10 +10,17 @@ end_date = "2022-12-31"
 
 # Fama French Data
 factors_ff3_monthly_raw = pdr.DataReader(
-  
-)
-factors_ff3_monthly = (factors_ff3_monthly_raw
-
+  name = "F-F_Research_Data_Factors", 
+  data_source = "famafrench", 
+  start = start_date, 
+  end = end_date)[0]
+factors_ff3_monthly = (factors_ff3_monthly_raw.divide(
+  100
+).reset_index(names = "month"
+).assign(month = lambda x : pd.to_datetime(
+  x["month"].astype(str))
+).rename(str.lower, axis = "columns"
+).rename(columns = {"mkt-rf" : "mkt_excess"})
 )
 factors_ff5_monthly_raw = pdr.DataReader(
   
