@@ -13,7 +13,13 @@ from sklearn.model_selection import(
 )
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
-from klearn.pipeline import Pipeline
+from sklearn.pipeline import Pipeline
 from sklearn.linear_model import ElasticNet, Lasso, Ridge
 
 # Data preparation
+tidy_finance = sqlite3.connect(
+  database = "data/tidy_finance_python.sqlite"
+)
+factors_ff3_monthly = (pd.read_sql_query(
+  sql = "SELECT *"
+))
